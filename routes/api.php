@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CilentController;
+use App\Http\Controllers\ExcelImportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,6 @@ Route::get('cilent/show', [CilentController::class, 'index']);
 Route::post('cilent/create', [CilentController::class, 'store']);
 Route::put('cilent/update/{id}', [CilentController::class, 'update']);
 
+Route::post('cilent/import_from_excel',[ExcelImportController::class, 'importFromExcel']);
+//shu yerda shu routni middlwega kiritish kerakmi?
 
