@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('age');
             $table->enum('gender',['male','female']);
             $table->boolean('active')->default(true);
-
             $table->timestamps();
         });
     }
