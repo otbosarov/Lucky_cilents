@@ -23,7 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('cilent/show', [CilentController::class, 'index']);
 Route::post('cilent/create', [CilentController::class, 'store']);
 Route::put('cilent/update/{id}', [CilentController::class, 'update']);
+Route::get('cilent_action',[CilentController::class,'cilent_action']);
 
 Route::post('cilent/import_from_excel',[ExcelImportController::class, 'importFromExcel']);
 //shu yerda shu routni middlwega kiritish kerakmi?
 
+Route::post('cilent/export_to_excel',[ExcelImportController::class, 'exportToExcel']);
