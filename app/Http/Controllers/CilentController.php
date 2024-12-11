@@ -9,6 +9,7 @@ use App\Http\Resources\CilentResource;
 use App\Models\Cilent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Nette\Utils\Random;
 
 class CilentController extends Controller
 {
@@ -54,9 +55,6 @@ class CilentController extends Controller
     ->limit(2)
     ->get();
      $action = collect($male->merge($female))->shuffle();
-     $ids = $action->pluck('id');
-     Cilent::whereIn('id',$ids)->update(['active' => false]);
-
-       return $action;
+     return ['data' => $action]; 
     }
 }
