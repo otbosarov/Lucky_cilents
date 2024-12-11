@@ -20,8 +20,6 @@ class CilentController extends Controller
     }
     public function store(CilentCreateRequest $request)
     {
-        DB::beginTransaction();
-        try{
         Cilent::create([
             'client_name' => $request->client_name,
             'workplace' => $request->workplace,
@@ -29,23 +27,13 @@ class CilentController extends Controller
             'age' => $request->age,
             'gender' => $request->gender,
         ]);
-        DB::commit();
         return response()->json(['message' => 'Mijoz yaratildi '], 201);
-    }catch(\Exception $exception){
-       DB::rollBack();
-       return response()->json([
-        "message" => 'Dasturda kutilmagan xatolik',
-        'error' => $exception -> getMessage(),
-        'line' => $exception -> getLine(),
-        'file' => $exception -> getFile(),
-    ]);
-
     }
-}
+
 
     public function update(CilentUpdateRequest $request, $id)
     {
-        Cilent::where('id', $id)->first()
+        Cilent::find($id)
             ->update([
                 'workplace' => $request->workplace,
                 'client_salary' => $request->client_salary,
@@ -55,20 +43,20 @@ class CilentController extends Controller
     }
     public function cilent_action()
     {
+    $male = Cilent::where('active','=',true)
+    ->where('gender','=','male')
+    ->inRandomOrder()
+    ->limit(2)
+    ->get();
+    $female = Cilent::where('active','=',true)
+    ->where('gender','=','female')
+    ->inRandomOrder()
+    ->limit(2)
+    ->get();
+     $action = collect($male->merge($female))->shuffle();
+     $ids = $action->pluck('id');
+     Cilent::whereIn('id',$ids)->update(['active' => false]);
 
-        $female = Cilent::where('active', true)
-        ->inRandomOrder()->limit(2)
-        ->where('gender', 'female')
-        ->get();
-        $male = Cilent::where('active', true)
-        ->inRandomOrder()->limit(2)
-        ->where('gender', 'male')
-        ->get();
-
-        $action = collect($male->merge($female));
-        $ids = $action->pluck('id');
-        Cilent::whereIn('id', $ids)->update(['active' =>  false]);
-        return $action->first();
-
+       return $action;
     }
 }

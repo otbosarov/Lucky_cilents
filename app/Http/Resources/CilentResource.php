@@ -16,14 +16,14 @@ class CilentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'Mijoz_ismi' => $this->client_name,
-            'Ish_joyi' => $this->workplace,
-            'Mijoz_ish_xaqi' => $this->client_salary,
-            'Yoshi' => $this->age,
-            'Jinsi' => $this->gender,
+            'client_name' => $this->client_name,
+            'workplace' => $this->workplace,
+            'client_salary' => $this->client_salary,
+            'age' => $this->age,
+            'gender' => $this->gender,
             'active' => $this->active,
-            'Yaratilgan_sana' => $this->created_at->format('Y-m-d H:i:s'),
-            'Ozgartirilgan_sana' => $this->created_at->format('Y-m-d H:i:s'),
+            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }
