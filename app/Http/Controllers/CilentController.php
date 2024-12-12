@@ -55,6 +55,6 @@ class CilentController extends Controller
     ->limit(2)
     ->get();
      $action = collect($male->merge($female))->shuffle();
-     return ['data' => $action]; 
+     return ['data' => $action];
     }
 }
