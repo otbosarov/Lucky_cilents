@@ -3,11 +3,10 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\TestCase as TestingTestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class WinnersTest extends TestingTestCase
+class WinnerTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -16,6 +15,7 @@ class WinnersTest extends TestingTestCase
     {
         $response = $this->get('/api/cilent_action');
         $response->assertStatus(200);
+        
         $data = collect($response->json(['data']));
         if($data->where('gender', 'female')->count() != 2) {
             $this->assertTrue(false);
@@ -24,5 +24,4 @@ class WinnersTest extends TestingTestCase
             $this->assertTrue(false);
         }
     }
-
 }
