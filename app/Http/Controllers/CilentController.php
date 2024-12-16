@@ -44,17 +44,17 @@ class CilentController extends Controller
     }
     public function cilent_action()
     {
-    $male = Cilent::where('active','=',true)
-    ->where('gender','=','male')
-    ->inRandomOrder()
-    ->limit(2)
-    ->get();
-    $female = Cilent::where('active','=',true)
-    ->where('gender','=','female')
-    ->inRandomOrder()
-    ->limit(2)
-    ->get();
-     $action = collect($male->merge($female))->shuffle();
-     return ['data' => $action];
+        $male = Cilent::where('active', '=', true)
+            ->where('gender', '=', 'male')
+            ->inRandomOrder()
+            ->limit(2)
+            ->get();
+        $female = Cilent::where('active', '=', true)
+            ->where('gender', '=', 'female')
+            ->inRandomOrder()
+            ->limit(2)
+            ->get();
+        $action = collect($male->merge($female))->shuffle();
+        return ['data' => $action];
     }
 }
