@@ -10,6 +10,17 @@ class TelegramController extends Controller
 {
     public function handle(Request $request){
         $update = Telegram::getWebhookUpdates();
-        Log::info('update', [$update]);
+       // Log::info('update', [$update]);
+        $chatId = $request['message']['chat']['id'];
+        $text = $update->getMessage()->getText();
+
+        if ($text == '/start'){
+            Telegram::sendMessage([
+                'chat_id' => $chatId,
+                'text' => "assalamu alaykum botimizga xush kelibsiz!"
+            ]);
+        }
+
+
     }
 }
